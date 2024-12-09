@@ -1,4 +1,4 @@
-<?php 
+<?php  
 // Define o domínio do servidor
 $dominioserver = "zappro.gestorssh.com.br";
 
