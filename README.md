@@ -4,42 +4,45 @@
 
 ## 🚀 **Objetivo**
 
-Esta API verifica o **status de conexão do WhatsApp** via integração com uma sessão externa. Ela é responsável por retornar o estado da sessão (`open` ou outro status) para aplicações que desejam monitorar essa conexão.
+A API ZAPPRO oferece ferramentas para:  
+1️⃣ Verificar o **status de conexão do WhatsApp**.  
+2️⃣ Enviar mensagens automáticas para números no WhatsApp.  
 
 ---
 
-## 🛠️ **Detalhes da API**
+## **1️⃣ Verificar Status da Sessão**  
 
-### **URL da API**
+### 🌐 **URL da API**  
 ```
 https://zappro.gestorssh.com.br/statussession.php
 ```
 
----
+### 🛠️ **Método**  
+`POST`
 
-## 📤 **Dados Enviados via POST**
+### 📤 **Payload Enviado**
 
-A API recebe os seguintes dados no corpo da requisição JSON:
+| Campo            | Tipo     | Descrição                                      |
+|-------------------|----------|----------------------------------------------|
+| `instanceName`    | `string` | Token único para identificar a sessão.        |
+| `email`           | `string` | E-mail associado ao token para autenticação.  |
+
+#### 📝 **Exemplo de Payload**
 
 ```json
 {
   "instanceName": "xxxxxxxxxee1f64d813d7c20af5f2xxx",
-  "email": "nandoxxxxxx@gmail.com"
+  "email": "usuario@gmail.com"
 }
 ```
 
-### Parâmetros:
+### 🔄 **Resposta da API**
 
-- **`instanceName`**: Token único da sessão para autenticação.  
-- **`email`**: E-mail associado à sessão/token.
+| Campo      | Tipo     | Descrição                          |
+|------------|----------|------------------------------------|
+| `state`    | `string` | Status da conexão (`open` ou `closed`). |
 
----
-
-## 🔄 **Resposta da API**
-
-### **Formato**
-A resposta será um JSON com a seguinte estrutura:
-
+#### 🟢 **Exemplo - Conexão Ativa**  
 ```json
 {
   "instance": {
@@ -48,24 +51,7 @@ A resposta será um JSON com a seguinte estrutura:
 }
 ```
 
----
-
-### 🟢 **Caso Conectado:**
-
-```json
-{
-  "instance": {
-    "state": "open"
-  }
-}
-```
-
-> **Significado:** A sessão do WhatsApp está conectada.
-
----
-
-### 🔴 **Caso Desconectado:**
-
+#### 🔴 **Exemplo - Conexão Inativa**  
 ```json
 {
   "instance": {
@@ -74,32 +60,81 @@ A resposta será um JSON com a seguinte estrutura:
 }
 ```
 
-> **Significado:** A sessão do WhatsApp está desconectada.
-
 ---
 
-## 📊 **Cenários e Lógica**
+## **2️⃣ Enviar Mensagens**
 
-1. **`state = "open"`:** Indica que o WhatsApp está ativo.  
-2. **`state = "closed"`:** Indica desconexão da sessão.
+### 🌐 **URL da API**  
+```
+https://zappro.gestorssh.com.br/textsend.php
+```
 
----
+### 🛠️ **Método**  
+`POST`
 
-## 🔗 **Exemplo de Uso**
+### 📤 **Payload Enviado**
 
-Para verificar o status com `Fetch API` do frontend:
+| Campo              | Tipo       | Descrição                                                                                  |
+|---------------------|------------|------------------------------------------------------------------------------------------|
+| `number`           | `string`   | 📱 Número do WhatsApp (formato internacional, ex.: `5522888889999`).                       |
+| `textMessage.text` | `string`   | ✍️ Texto da mensagem a ser enviada.                                                       |
+| `options.delay`    | `integer`  | ⏳ Tempo de atraso (em milissegundos) para o envio.                                        |
+| `options.presence` | `string`   | 💬 Status de presença antes do envio (`composing` ou outros valores permitidos).           |
+| `instanceName`     | `string`   | 🏷️ Token único da instância configurada.                                                  |
+| `email`            | `string`   | 📧 E-mail do usuário para autenticação.                                                   |
 
-```javascript
-fetch('https://zappro.gestorssh.com.br/statussession.php', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    instanceName: 'xxxxxxxxxee1f64d813d7c20af5f2xxx',
-    email: 'nandoxxxxxx@gmail.com'
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data));
+#### 📝 **Exemplo de Payload**
+
+```json
+{
+  "number": "5522888889999",
+  "textMessage": {
+    "text": "Olá! Esta é uma mensagem de teste."
+  },
+  "options": {
+    "delay": 1500,
+    "presence": "composing"
+  },
+  "instanceName": "xxxxxxxxxee1f64d813d7c20af5f2xxx",
+  "email": "usuario@gmail.com"
+}
+```
+
+### 🔄 **Resposta da API**
+
+| Campo    | Tipo      | Descrição                                      |
+|----------|-----------|-----------------------------------------------|
+| `status` | `string`  | ✅ Status do envio (`PENDING` indica sucesso). |
+| `error`  | `string`  | ❌ Mensagem de erro, caso ocorra.              |
+
+#### ✅ **Exemplo de Resposta - Sucesso**  
+
+```json
+{
+  "status": "PENDING"
+}
+```
+
+#### ❌ **Exemplo de Resposta - Erro**
+
+```json
+{
+  "status": "FAILED",
+  "error": "Número inválido"
+}
 ```
 
 ---
+
+## 🔍 **Observações Gerais**
+
+- **Formato Internacional**: Sempre use números no formato `55 + código DDD + número`.  
+- **Simulação de Digitação**: O campo `delay` simula um atraso antes do envio.  
+- **Status de Presença**: Use `composing` para simular que o remetente está "escrevendo".  
+
+---
+
+## 🌟 **Pronto para usar!**
+
+1️⃣ Configure os parâmetros corretamente.  
+2️⃣ Teste as APIs para monitorar conexões e enviar mensagens com eficiência. 🚀
