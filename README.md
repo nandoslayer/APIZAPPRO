@@ -137,4 +137,11 @@ https://zappro.gestorssh.com.br/textsend.php
 ## 🌟 **Pronto para usar!**
 
 1️⃣ Configure os parâmetros corretamente.  
-2️⃣ Teste as APIs para monitorar conexões e enviar mensagens com eficiência. 🚀
+2️⃣ Teste as APIs para monitorar conexões e enviar mensagens com eficiência. 🚀  
+
+---
+
+## 📬 **Entre em Contato**
+
+📢 **Canal no Telegram**: [https://t.me/paineis](https://t.me/paineis)  
+👤 **Meu Telegram**: [https://t.me/nandoslayer](https://t.me/nandoslayer)
