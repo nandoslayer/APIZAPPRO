@@ -1,4 +1,4 @@
-# 📄 **Documentação da API - APIZAPPRO**
+# 📄 **Documentação da API - ZAPPRO**
 
 ---
 
@@ -102,4 +102,4 @@ fetch('https://zappro.gestorssh.com.br/statussession.php', {
 .then(data => console.log(data));
 ```
 
---- 
+---
