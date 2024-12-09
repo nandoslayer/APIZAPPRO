@@ -23,8 +23,8 @@ A API recebe os seguintes dados no corpo da requisição JSON:
 
 ```json
 {
-  "instanceName": "nandoctslayeree1f64d813d7c20af5f2",
-  "email": "nandoctslayer@gmail.com"
+  "instanceName": "xxxxxxxxxee1f64d813d7c20af5f2xxx",
+  "email": "nandoxxxxxx@gmail.com"
 }
 ```
 
